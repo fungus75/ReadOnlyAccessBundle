@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+
+    KimaiPlugin\ReadOnlyAccessBundle\:
+        resource: '../../*'
+        exclude: '../../{Resources}'
+
+    KimaiPlugin\ReadOnlyAccessBundle\Controller\:
+        resource: '../../Controller'
+        tags: ['controller.service_arguments']

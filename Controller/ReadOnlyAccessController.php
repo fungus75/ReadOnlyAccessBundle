@@ -45,8 +45,32 @@ class ReadOnlyAccessController extends AbstractController
 
 	return $this->render('@ReadOnlyAccess/index.html.twig', [
             'entries' => $entries,
-            'query' => $query
+            'query' => $query,
+	    'page' => $page
         ]);
+    }
+
+
+   /**
+     * @Route(path="/togglePermission/{page}/{user}", requirements={"page": "[1-9]\d*", "user": "[1-9]\d*"}, name="readonly_access_admin_togglepermission", methods={"GET"})
+     * @Security("is_granted('ROLE_SUPER_ADMIN') or is_granted('edit_readonly_user')")
+     * @param int $page
+     * @param int $user
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function togglePermissionAction($page, $user, Request $request)
+    {
+
+
+        $userEntry=$this->getDoctrine()->getRepository(User::class)->find($user);
+        if ($userEntry!=null) {
+            if ($userEntry->hasRole("READONLY_USER")) $userEntry->removeRole("READONLY_USER");
+            else $userEntry->addRole("READONLY_USER");
+	    $this->getDoctrine()->getManager()->flush();
+        }
+
+        return $this->indexAction($page,$request);
     }
 
 }

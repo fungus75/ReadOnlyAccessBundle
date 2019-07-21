@@ -1,7 +1,7 @@
 {
     "name": "keleo/read-only-access",
     "description": "A Kimai 2 plugin, that creates a readonly user that can show recorded times for a special company.",
-    "homepage": "https://pilz.cc/keleo-read-only-access",
+    "homepage": "http://pilz.cc/kimai2-read-only-access",
     "type": "kimai-plugin",
     "require": {
         "kimai/kimai2-composer": "*"
@@ -15,7 +15,7 @@
         {
             "name": "Rene Pilz",
             "email": "rene@pilz.cc",
-            "homepage": "https://www.pilz.cc"
+            "homepage": "http://www.pilz.cc"
         }
     ],
     "extra": {

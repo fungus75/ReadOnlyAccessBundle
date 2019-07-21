@@ -10,6 +10,9 @@
 namespace KimaiPlugin\ReadOnlyAccessBundle\Controller;
 
 use App\Controller\AbstractController;
+use App\Repository\Query\UserQuery;
+use App\Entity\User;
+
 //use KimaiPlugin\CustomCSSBundle\Entity\CustomCss;
 //use KimaiPlugin\CustomCSSBundle\Form\CustomCssType;
 //use KimaiPlugin\CustomCSSBundle\Repository\CustomCssRepository;
@@ -25,14 +28,25 @@ class ReadOnlyAccessController extends AbstractController
 {
 
     /**
-     * @Route(path="", name="readonly_access", methods={"GET", "POST"})
-
+     * @Route(path="", defaults={"page": 1}, name="readonly_access_admin", methods={"GET"})
+     * @Route(path="/page/{page}", requirements={"page": "[1-9]\d*"}, name="readonly_access_admin_paginated", methods={"GET"})
+     *
+     * @param int $page
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request)
+    public function indexAction($page, Request $request)
     {
-	return $this->render('@ReadOnlyAccess/index.html.twig');
+        $query = new UserQuery();
+        $query->setPage($page);
+        $query->setOrderBy('username');
+        /* @var $entries Pagerfanta */
+        $entries = $this->getDoctrine()->getRepository(User::class)->findByQuery($query);
+
+	return $this->render('@ReadOnlyAccess/index.html.twig', [
+            'entries' => $entries,
+            'query' => $query
+        ]);
     }
 
 }

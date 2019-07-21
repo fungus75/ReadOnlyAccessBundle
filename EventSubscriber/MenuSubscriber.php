@@ -55,7 +55,7 @@ class MenuSubscriber implements EventSubscriberInterface
 
         if ($auth->isGranted('ROLE_SUPER_ADMIN') || $auth->isGranted('edit_readonly_user')) {
             $menu->addChild(
-                new MenuItemModel('readonly_access', 'Readony User', 'readonly_access', [], 'fab fa-css3')
+                new MenuItemModel('readonly_access', 'Readony User', 'readonly_access_admin', [], 'fab fa-css3')
             );
         }
     }

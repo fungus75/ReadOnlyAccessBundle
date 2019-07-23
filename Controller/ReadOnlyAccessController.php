@@ -11,7 +11,9 @@ namespace KimaiPlugin\ReadOnlyAccessBundle\Controller;
 
 use App\Controller\AbstractController;
 use App\Repository\Query\UserQuery;
+use App\Repository\Query\CustomerQuery;
 use App\Entity\User;
+use App\Entity\Customer;
 
 //use KimaiPlugin\CustomCSSBundle\Entity\CustomCss;
 //use KimaiPlugin\CustomCSSBundle\Form\CustomCssType;
@@ -43,10 +45,16 @@ class ReadOnlyAccessController extends AbstractController
         /* @var $entries Pagerfanta */
         $entries = $this->getDoctrine()->getRepository(User::class)->findByQuery($query);
 
+	$customerQuery = new CustomerQuery();
+        $customerQuery->setOrderBy('name');
+	$customerQuery->setResultType(CustomerQuery::RESULT_TYPE_QUERYBUILDER);
+	$customers = $this->getDoctrine()->getRepository(Customer::class)->findByQuery($customerQuery);
+
 	return $this->render('@ReadOnlyAccess/index.html.twig', [
             'entries' => $entries,
             'query' => $query,
-	    'page' => $page
+	    'page' => $page,
+	    'customers' => $customers
         ]);
     }
 

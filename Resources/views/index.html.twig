@@ -23,6 +23,11 @@
 {% endblock %}
 
 {% block main %}
+   <script>
+     function readOnlyCustomerChanged(entryId) {
+         alert("Changed on "+entryId);
+     }
+   </script>
 
     {% if entries.count == 0 %}
         {{ widgets.callout('warning', 'error.no_entries_found') }}
@@ -43,7 +48,19 @@
                     {% endfor %}
                     {{ widgets.label_visible(hasReadonlyRole) }}
                 </td>
-                <td class="{{ tables.data_table_column_class(tableName, columns, 'customer') }}"></td>
+                <td class="{{ tables.data_table_column_class(tableName, columns, 'customer') }}">
+                    {% set readOnlyCustomer = '' %}
+                    {% for preference in entry.preferences %}
+                        {% if preference.name == 'readOnlyAccessCustomer' %}
+                            {% set readOnlyCustomer = preference.value %}
+                        {% endif %}
+                    {% endfor %}
+                    <select size="1" id="readOnlyCustomerDD_{{ entry.id }}" onchange="readOnlyCustomerChanged({{ entry.id }})">
+                        {% for cust in customers %}
+                            <option value="{{ cust.id }}" {% if cust.id == readOnlyCustomer %} selected {% endif %} >{{ cust.name }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
             </tr>
         {% endfor %}
 

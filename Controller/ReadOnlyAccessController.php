@@ -47,8 +47,8 @@ class ReadOnlyAccessController extends AbstractController
 
 	$customerQuery = new CustomerQuery();
         $customerQuery->setOrderBy('name');
-	$customerQuery->setResultType(CustomerQuery::RESULT_TYPE_QUERYBUILDER);
 	$customers = $this->getDoctrine()->getRepository(Customer::class)->findByQuery($customerQuery);
+
 
 	return $this->render('@ReadOnlyAccess/index.html.twig', [
             'entries' => $entries,

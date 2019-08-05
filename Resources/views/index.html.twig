@@ -25,7 +25,14 @@
 {% block main %}
    <script>
      function readOnlyCustomerChanged(entryId) {
-         alert("Changed on "+entryId);
+	var url="{{ url('readonly_access_admin_changecustomer') }}";
+	var dropDownId="readOnlyCustomerDD_"+entryId;
+	var dropDownElement = document.getElementById(dropDownId);
+	if (dropDownElement) {
+		var val=dropDownElement.value;
+		url=url+"/"+entryId+"/"+val;
+		window.location=url;
+	}
      }
    </script>
 
@@ -39,10 +46,10 @@
                 <td>{{ widgets.username(entry) }}</td>
                 <td class="{{ tables.data_table_column_class(tableName, columns, 'username') }}">{{ entry.username }}</td>
                 <td class="{{ tables.data_table_column_class(tableName, columns, 'email') }}">{{ entry.email }}</td>
-                <td class="open-edit alternative-link {{ tables.data_table_column_class(tableName, columns, 'isReadonlyEnabled') }}" data-href="{{ path('readonly_access_admin_togglepermission', {'user': entry.id,'page':page}) }}">
+                <td style="cursor: pointer" class="open-edit alternative-link {{ tables.data_table_column_class(tableName, columns, 'isReadonlyEnabled') }}" data-href="{{ path('readonly_access_admin_togglepermission', {'user': entry.id,'page':page}) }}">
                     {% set hasReadonlyRole = false %}
                     {% for role in entry.roles %}
-                        {% if role == 'READONLY_USER' %}
+                        {% if role == 'ROLE_READONLYACCESS_USER' %}
                             {% set hasReadonlyRole = true %}
                         {% endif %}
                     {% endfor %}
@@ -55,7 +62,10 @@
                             {% set readOnlyCustomer = preference.value %}
                         {% endif %}
                     {% endfor %}
-                    <select size="1" id="readOnlyCustomerDD_{{ entry.id }}" onchange="readOnlyCustomerChanged({{ entry.id }})">
+                    <select size="1" id="readOnlyCustomerDD_{{ entry.id }}" onchange="readOnlyCustomerChanged({{ entry.id }})" {% if not hasReadonlyRole %} disabled="disabled" {% endif %} >
+			{% if readOnlyCustomer == '' %}
+			    <option> ---- </option>
+			{% endif %}
                         {% for cust in customers %}
                             <option value="{{ cust.id }}" {% if cust.id == readOnlyCustomer %} selected {% endif %} >{{ cust.name }}</option>
                         {% endfor %}

@@ -15,9 +15,6 @@ use App\Repository\Query\CustomerQuery;
 use App\Entity\User;
 use App\Entity\Customer;
 
-//use KimaiPlugin\CustomCSSBundle\Entity\CustomCss;
-//use KimaiPlugin\CustomCSSBundle\Form\CustomCssType;
-//use KimaiPlugin\CustomCSSBundle\Repository\CustomCssRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -58,7 +55,6 @@ class ReadOnlyAccessController extends AbstractController
         ]);
     }
 
-
    /**
      * @Route(path="/togglePermission/{page}/{user}", requirements={"page": "[1-9]\d*", "user": "[1-9]\d*"}, name="readonly_access_admin_togglepermission", methods={"GET"})
      * @Security("is_granted('ROLE_SUPER_ADMIN') or is_granted('edit_readonly_user')")
@@ -69,16 +65,35 @@ class ReadOnlyAccessController extends AbstractController
      */
     public function togglePermissionAction($page, $user, Request $request)
     {
-
-
         $userEntry=$this->getDoctrine()->getRepository(User::class)->find($user);
         if ($userEntry!=null) {
-            if ($userEntry->hasRole("READONLY_USER")) $userEntry->removeRole("READONLY_USER");
-            else $userEntry->addRole("READONLY_USER");
+            if ($userEntry->hasRole("ROLE_READONLYACCESS_USER")) $userEntry->removeRole("ROLE_READONLYACCESS_USER");
+            else $userEntry->addRole("ROLE_READONLYACCESS_USER");
 	    $this->getDoctrine()->getManager()->flush();
         }
 
         return $this->indexAction($page,$request);
     }
+
+
+   /**
+     * @Route(path="/changecustomer/{user}/{customer}", defaults={"customer": "", "user": ""}, requirements={"customer": "[1-9]\d*", "user": "[1-9]\d*"}, name="readonly_access_admin_changecustomer", methods={"GET"})
+     * @Security("is_granted('ROLE_SUPER_ADMIN') or is_granted('edit_readonly_user')")
+     * @param int $user
+     * @param int $customer
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function changeCustomerAction($user, $customer, Request $request)
+    {
+        $userEntry=$this->getDoctrine()->getRepository(User::class)->find($user);
+        if ($userEntry!=null) {
+            $userEntry->setPreferenceValue("readOnlyAccessCustomer",$customer);
+            $this->getDoctrine()->getManager()->flush();
+        }
+
+        return $this->indexAction(1,$request);
+    }
+
 
 }

@@ -12,6 +12,22 @@ cd /kimai/var/plugins/
 git clone https://github.com/fungus75/ReadOnlyAccessBundle.git
 ```
 
+Create (or add if still exist) the file config/packages/local.yml
+with this content:
+```
+kimai:
+    permissions:
+        sets:
+            READONLYACCESSPLUGIN: ['edit_readonly_user', 'view_readonly_customer']
+            READONLYACCESSPLUGINADMIN: ['@READONLYACCESSPLUGIN']
+            READONLYACCESSPLUGINUSER:  ['@READONLYACCESSPLUGIN','!edit_readonly_user']
+        maps:
+            ROLE_READONLYACCESS_ADMIN: ['READONLYACCESSPLUGINADMIN']
+            ROLE_READONLYACCESS_USER:  ['READONLYACCESSPLUGINUSER']
+```
+Make sure that you just use spaces and no tabs!
+
+
 And then rebuild the cache: 
 ```
 cd /kimai/

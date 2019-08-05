@@ -58,5 +58,12 @@ class MenuSubscriber implements EventSubscriberInterface
                 new MenuItemModel('readonly_access', 'Readony User', 'readonly_access_admin', [], 'fab fa-css3')
             );
         }
+
+	if ($auth->isGranted('view_readonly_customer')) {
+            $event->getMenu()->addItem(
+                new MenuItemModel('readonly_access_showcustomer', 'Show Customer', 'readonly_access_showcustomer', [], 'fab fa-css3')
+            );
+	}
+
     }
 }

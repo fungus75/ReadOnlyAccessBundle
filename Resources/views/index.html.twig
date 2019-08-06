@@ -8,15 +8,15 @@
     'alias': 'alwaysVisible',
     'username': 'hidden-xs',
     'email': 'hidden-xs hidden-sm',
-    'isReadonlyEnabled': 'hidden-xs',
+    'readonlycustomer.isEnabled': 'hidden-xs',
     'customer': ''
 } %}
 
 {% set tableName = 'readonly_user_admin' %}
 
 
-{% block page_title %}{{ 'Read Only Access'|trans }}{% endblock %}
-{% block page_subtitle %}{{ 'ReadOnlyAccess.subtitle'|trans }}{% endblock %}
+{% block page_title %}{{ 'readonlycustomer.admin.title'|trans }}{% endblock %}
+{% block page_subtitle %}{{ 'readonlycustomer.admin.subtitle'|trans }}{% endblock %}
 
 {% block main_before %}
     {{ tables.data_table_column_modal(tableName, columns) }}

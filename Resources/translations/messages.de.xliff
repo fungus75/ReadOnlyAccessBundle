@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file date="2019-02-20T20:00:00Z" source-language="en" target-language="de" datatype="plaintext" original="messages.en.xliff">
+        <body>
+            <trans-unit id="readonlycustomer.admin.title">
+                <source>readonlycustomer.admin.title</source>
+                <target>Readonly Access Customer</target>
+            </trans-unit>
+            <trans-unit id="readonlycustomer.admin.subtitle">
+                <source>Administer Readonly Access Users and corresponding Customers</source>
+                <target>Verwalte Readonly Access User und die entsprechenden Kunden</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
+

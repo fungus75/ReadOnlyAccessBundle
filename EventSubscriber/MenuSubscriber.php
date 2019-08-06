@@ -61,7 +61,7 @@ class MenuSubscriber implements EventSubscriberInterface
 
 	if ($auth->isGranted('view_readonly_customer')) {
             $event->getMenu()->addItem(
-                new MenuItemModel('readonly_access_showcustomer', 'Show Customer', 'readonly_access_showcustomer', [], 'fab fa-css3')
+                new MenuItemModel('readonly_access_showcustomer', 'Show Recorded Times', 'readonly_access_showcustomer', [], 'fab fa-css3')
             );
 	}
 

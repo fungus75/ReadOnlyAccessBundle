@@ -4,10 +4,91 @@
 {% import "macros/toolbar.html.twig" as toolbar %}
 {% import "macros/actions.html.twig" as actions %}
 
+{% set columns = {
+    'date': 'alwaysVisible',
+    'project': 'hidden-xs hidden-sm',
+    'activity': 'hidden-xs hidden-sm',
+    'description': 'hidden-xs hidden-sm',
+    'unit_price': 'hidden-xs',
+    'duration': '',
+    'total_rate': '',
+} %}
 
-{% block page_title %}{{ 'Read Only Customer'|trans }}{% endblock %}
-{% block page_subtitle %}{{ 'ReadOnlyAccessCustomer.subtitle'|trans }}{% endblock %}
+{% set tableName = 'export' %}
+
+{% block page_title %}{{ 'readonlycustomer.export.title'|trans }}{% endblock %}
+{% block page_subtitle %}{{ 'readonlycustomer.export.subtitle'|trans }}{% endblock %}
+
+{% set beforeOffset = monthOffset +1 %}
+{% set afterOffset  = monthOffset -1 %}
+ 
 
 {% block main %}
-Hallo!
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2>{{ 'export.document_title'|trans }}</h2>
+            <h3>{{ 'readonlycustomer.export.for_customer'|trans }} {{customer.name}}</h3>
+            <a href='{{ url('readonly_access_showcustomer',{'monthOffset':beforeOffset}) }}'> &lt;&lt; </a>
+                {{ 'export.period'|trans }}:
+                {{ query.begin|date_short }} - {{ query.end|date_short }}
+            {% if afterOffset >= 0 %}
+	            <a href='{{ url('readonly_access_showcustomer',{'monthOffset':afterOffset}) }}'> &gt;&gt; </a>
+            {% endif %}
+        </div>
+    </div>
+
+   <br />
+
+
+    {% if entries is empty %}
+        {{ widgets.callout('warning', 'error.no_entries_found') }}
+    {% else %}
+        {{ tables.data_table_header(tableName, columns) }}
+        {% for entry in entries %}
+            {% set currency = entry.project.customer.currency %}
+            {% set duration = entry.duration|duration %}
+            {% if entry.fixedRate is not null %}
+                {% set rate = entry.fixedRate %}
+                {% set duration = 1 %}
+            {% elseif entry.hourlyRate is not null %}
+                {% set rate = entry.hourlyRate %}
+            {% else %}
+                {% set rate = entry.user.preferenceValue('hourly_rate') %}
+            {% endif %}
+            <tr>
+                <td class="text-nowrap">{{ entry.begin|date_short }}</td>
+                <td class="{{ tables.data_table_column_class(tableName, columns, 'project') }}">{{ widgets.label_project(entry.project) }}</td>
+                <td class="{{ tables.data_table_column_class(tableName, columns, 'activity') }}">{{ widgets.label_activity(entry.activity) }}</td>
+                <td class="{{ tables.data_table_column_class(tableName, columns, 'description') }} timesheet-description">
+                    {{ entry.description }}
+                </td>
+                <td class="{{ tables.data_table_column_class(tableName, columns, 'unit_price') }} text-nowrap">
+                    {{ rate|money(currency) }}
+                </td>
+                <td class="{{ tables.data_table_column_class(tableName, columns, 'duration') }} text-nowrap">
+                    {{ duration }}
+                </td>
+                <td class="{{ tables.data_table_column_class(tableName, columns, 'total_rate') }} text-nowrap">
+                    {{ entry.rate|money(currency) }}
+                </td>
+            </tr>
+        {% endfor %}
+        {{ tables.data_table_footer(entries) }}
+
+        {% if is_granted('create_export') %}
+        <div class="row no-print">
+            <div class="col-xs-12">
+                <div class="btn-group pull-right" id="export-buttons" role="group">
+                    {% for button in renderer %}
+                        <button type="button" id="export-{{ button.id }}-button" class="btn btn-success startExportBtn" data-type="{{ button.id }}">
+                            <i class="{{ button.icon|icon }}"></i> {{ ('button.' ~ button.title)|trans }}
+                        </button>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    {% endif %}
+
 {% endblock %}

@@ -50,7 +50,7 @@ In the new administration screen, this permission can be set to an existing user
  
 ## Screenshot
 
-![Screenshot](https://raw.githubusercontent.com/Keleo/CustomCSSBundle/master/screenshot.jpg)
+![Screenshot](https://raw.githubusercontent.com/fungus75/ReadOnlyAccessBundle/master/screenshot.jpg)
 
 
 

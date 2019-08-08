@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3
+- new Features
+ - added total summary of hours and money
+
 ## 0.2
 - (Hopefully) working version
  - (more or less) feature-complete

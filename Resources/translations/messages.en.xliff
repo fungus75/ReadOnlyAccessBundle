@@ -36,6 +36,11 @@
                 <target>Show Recorded Times</target>
             </trans-unit>
 
+            <trans-unit id="readonlycustomer.export.summary.description">
+		<source>readonlycustomer.export.summary.description</source>
+		<target>Total Summary</target>
+	    </trans-unit>
+
         </body>
     </file>
 </xliff>

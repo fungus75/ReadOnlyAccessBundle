@@ -36,6 +36,10 @@
                 <target>Erfasste Zeiten</target>
             </trans-unit>
 
+            <trans-unit id="readonlycustomer.export.summary.description">
+                <source>readonlycustomer.export.summary.description</source>
+                <target>Gesamtsumme</target>
+            </trans-unit>
 
         </body>
     </file>

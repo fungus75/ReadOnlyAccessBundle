@@ -40,6 +40,9 @@
 
    <br />
 
+    {% set totalTime =0 %}
+    {% set totalMoney=0 %}
+    {% set totalCurrency='' %}
 
     {% if entries is empty %}
         {{ widgets.callout('warning', 'error.no_entries_found') }}
@@ -48,6 +51,7 @@
         {% for entry in entries %}
             {% set currency = entry.project.customer.currency %}
             {% set duration = entry.duration|duration %}
+	    {% set totalTime = totalTime + entry.duration %}
             {% if entry.fixedRate is not null %}
                 {% set rate = entry.fixedRate %}
                 {% set duration = 1 %}
@@ -71,9 +75,20 @@
                 </td>
                 <td class="{{ tables.data_table_column_class(tableName, columns, 'total_rate') }} text-nowrap">
                     {{ entry.rate|money(currency) }}
+                    {% set totalMoney = totalMoney + entry.rate %}
+                    {% set totalCurrency = currency %}
                 </td>
             </tr>
         {% endfor %}
+	<tr>
+		<td colspan="3"></td>
+		<td class="{{ tables.data_table_column_class(tableName, columns, 'description') }} timesheet-description">
+			{{ 'readonlycustomer.export.summary.description'|trans }}
+		</td>
+		<td></td>
+		<td class="{{ tables.data_table_column_class(tableName, columns, 'duration') }} text-nowrap"> {{ totalTime|duration }}</td>
+		<td class="{{ tables.data_table_column_class(tableName, columns, 'total_rate') }} text-nowrap"> {{ totalMoney|money(totalCurrency) }}</td>
+	</tr>
         {{ tables.data_table_footer(entries) }}
 
         {% if is_granted('create_export') %}

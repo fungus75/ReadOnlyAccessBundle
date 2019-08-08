@@ -40,7 +40,7 @@ class UserProfileSubscriber implements EventSubscriberInterface
             (new UserPreference())
                 ->setName('readOnlyAccessCustomer')
                 ->setType(CustomerType::class)
-                
+                ->setEnabled(false)
         );
     }
 } 

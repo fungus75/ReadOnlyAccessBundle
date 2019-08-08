@@ -7,9 +7,36 @@
                 <target>Readonly Access Customer</target>
             </trans-unit>
             <trans-unit id="readonlycustomer.admin.subtitle">
-                <source>Administer Readonly Access Users and corresponding Customers</source>
-                <target>Verwalte Readonly Access User und die entsprechenden Kunden</target>
+                <source>readonlycustomer.admin.subtitle</source>
+                <target>Verwalte Readonly Access User und die zugewiesenen Kunden</target>
             </trans-unit>
+            <trans-unit id="label.readonlycustomer.isEnabled">
+                <source>label.readonlycustomer.isEnabled</source>
+                <target>Aktiviert</target>
+            </trans-unit>
+            <trans-unit id="Readony User">
+                <source>Readony User</source>
+                <target>ReadonlyUser Plugin</target>
+            </trans-unit>
+
+            <trans-unit id="readonlycustomer.export.title">
+                <source>readonlycustomer.export.title</source>
+                <target>Erfasste Zeiten</target>
+            </trans-unit>
+            <trans-unit id="readonlycustomer.export.subtitle">
+                <source>readonlycustomer.export.subtitle</source>
+                <target>Erfasste Zeiten für Ihr Unternehmen anzeigen</target>
+            </trans-unit>
+            <trans-unit id="readonlycustomer.export.for_customer">
+                <source>readonlycustomer.export.for_customer</source>
+                <target>für Kunden</target>
+            </trans-unit>
+            <trans-unit id="Show Recorded Times">
+                <source>Show Recorded Times</source>
+                <target>Erfasste Zeiten</target>
+            </trans-unit>
+
+
         </body>
     </file>
 </xliff>

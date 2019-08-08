@@ -1,6 +1,6 @@
 {
     "name": "keleo/read-only-access",
-    "description": "A Kimai 2 plugin, that creates a readonly user that can show recorded times for a special company.",
+    "description": "A Kimai 2 plugin, that creates a readonly user who can show recorded times for a special company.",
     "homepage": "http://pilz.cc/kimai2-read-only-access",
     "type": "kimai-plugin",
     "require": {
@@ -20,8 +20,8 @@
     ],
     "extra": {
         "kimai": {
-            "require": "0.9",
-            "version": "0.1",
+            "require": "1.0",
+            "version": "0.2",
             "name": "ReadOnlyAccessBundle"
         }
     }

@@ -10,6 +10,32 @@
                 <source>readonlycustomer.admin.subtitle</source>
                 <target>Administer Readonly Access Users and corresponding Customers</target>
             </trans-unit>
+            <trans-unit id="label.readonlycustomer.isEnabled">
+                <source>label.readonlycustomer.isEnabled</source>
+                <target>Enabled</target>
+            </trans-unit>
+            <trans-unit id="Readony User">
+                <source>Readony User</source>
+                <target>ReadonlyUser Plugin</target>
+            </trans-unit>
+
+            <trans-unit id="readonlycustomer.export.title">
+                <source>readonlycustomer.export.title</source>
+                <target>Show Recorded Times</target>
+            </trans-unit>
+            <trans-unit id="readonlycustomer.export.subtitle">
+                <source>readonlycustomer.export.subtitle</source>
+                <target>Display Recorded times for your company</target>
+            </trans-unit>
+            <trans-unit id="readonlycustomer.export.for_customer">
+                <source>readonlycustomer.export.for_customer</source>
+                <target>for customer</target>
+            </trans-unit>
+            <trans-unit id="Show Recorded Times">
+                <source>Show Recorded Times</source>
+                <target>Show Recorded Times</target>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>

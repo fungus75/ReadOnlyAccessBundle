@@ -40,13 +40,17 @@ bin/console cache:warmup
 This bundle ships a new administration screen, which will be available for the following users:
 
 - `ROLE_SUPER_ADMIN` - every super administrator
-- `edit_custom_css` - every use that owns this permission 
+- `edit_readonly_user` - every use that owns this permission 
+
+This bundle also ships a new user-screen, which is available for users with teh following permission:
+
+- `view_readonly_customer`
+
+In the new administration screen, this permission can be set to an existing user.
  
-## Storage
-
-This bundle stores the custom CSS rules in the file `var/data/custom-css-bundle.css`. 
-Make sure its writable by your webserver!
-
 ## Screenshot
 
-![Screenshot](https://raw.githubusercontent.com/Keleo/CustomCSSBundle/master/screenshot.jpg)
+![Screenshot](https://raw.githubusercontent.com/fungus75/ReadOnlyAccessBundle/master/screenshot.jpg)
+
+
+

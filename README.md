@@ -52,5 +52,5 @@ In the new administration screen, this permission can be set to an existing user
 
 ![Screenshot](https://raw.githubusercontent.com/fungus75/ReadOnlyAccessBundle/master/screenshot.jpg)
 
-
+Hint: to grant the Readonly-Permission to an user, just click on "Yes/No" in the active-column of the Readonly-Admin-Screen
 

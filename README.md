@@ -2,7 +2,7 @@
 
 A Kimai 2 plugin, which allows to give users a readonly access to limited Companies defined in Kimai.
 
-The Developer of this plugin whishes to thank the creator of the CustomCSS Plugin because it was very helpfull. - https://github.com/Keleo/CustomCSSBundle
+The Developer of this plugin wishes to thank the creator of the CustomCSS Plugin because it was very helpfull. - https://github.com/Keleo/CustomCSSBundle
 
 ## Installation
 

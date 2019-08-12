@@ -13,6 +13,9 @@ use App\Event\ConfigureMainMenuEvent;
 use KevinPapst\AdminLTEBundle\Model\MenuItemModel;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+
+
 
 class MenuSubscriber implements EventSubscriberInterface
 {
@@ -21,13 +24,16 @@ class MenuSubscriber implements EventSubscriberInterface
      */
     private $security;
 
+    private $tokenStorage;
+
     /**
      * MenuSubscriber constructor.
      * @param AuthorizationCheckerInterface $security
      */
-    public function __construct(AuthorizationCheckerInterface $security)
+    public function __construct(TokenStorageInterface $tokenStorage, AuthorizationCheckerInterface $security)
     {
         $this->security = $security;
+	$this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -59,11 +65,15 @@ class MenuSubscriber implements EventSubscriberInterface
             );
         }
 
-	if ($auth->isGranted('view_readonly_customer')) {
-            $event->getMenu()->addItem(
-                new MenuItemModel('readonly_access_showcustomer', 'Show Recorded Times', 'readonly_access_showcustomer', [], 'fab fa-css3')
-            );
-	}
 
+	if ($token=$this->tokenStorage->getToken()) {
+		$user=$token->getUser();
+		$customerId=$user->getPreferenceValue("readOnlyAccessCustomer");
+		if ($customerId!="") {
+	            $event->getMenu()->addItem(
+        	        new MenuItemModel('readonly_access_showcustomer', 'Show Recorded Times', 'readonly_access_showcustomer', [], 'fab fa-css3')
+            	    );
+	        } 
+         }
     }
 }

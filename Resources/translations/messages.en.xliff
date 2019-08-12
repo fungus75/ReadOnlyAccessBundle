@@ -41,6 +41,12 @@
 		<target>Total Summary</target>
 	    </trans-unit>
 
+            <trans-unit id="readonlycustomer.admin.userIsDisabled">
+                <source>readonlycustomer.admin.userIsDisabled</source>
+                <target>deactivated</target>
+            </trans-unit>
+
+
         </body>
     </file>
 </xliff>

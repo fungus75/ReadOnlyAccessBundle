@@ -21,7 +21,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route(path="/readonly-access-user")
- * @Security("is_granted('view_readonly_customer')")
  */
 class ReadOnlyAccessUserController extends AbstractController
 {
@@ -33,6 +32,10 @@ class ReadOnlyAccessUserController extends AbstractController
     public function showCustomerTimesAction($monthOffset, Request $request) 
     {
 	$customerId=$this->getUser()->getPreferenceValue("readOnlyAccessCustomer");
+	if ($customerId=="" || $customerId===null) {
+		throw $this->createAccessDeniedException();
+	}
+
 	$customer=$this->getDoctrine()->getRepository(Customer::class)->find($customerId);
 
 	$begin=new \DateTime("first day of this month 00:00:00");

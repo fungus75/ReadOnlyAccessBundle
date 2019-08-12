@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4
+- updated to Kamai 2 V1.1
+
 ## 0.3
 - new Features
   - added total summary of hours and money

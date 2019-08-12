@@ -90,20 +90,6 @@
 		<td class="{{ tables.data_table_column_class(tableName, columns, 'total_rate') }} text-nowrap"> {{ totalMoney|money(totalCurrency) }}</td>
 	</tr>
         {{ tables.data_table_footer(entries) }}
-
-        {% if is_granted('create_export') %}
-        <div class="row no-print">
-            <div class="col-xs-12">
-                <div class="btn-group pull-right" id="export-buttons" role="group">
-                    {% for button in renderer %}
-                        <button type="button" id="export-{{ button.id }}-button" class="btn btn-success startExportBtn" data-type="{{ button.id }}">
-                            <i class="{{ button.icon|icon }}"></i> {{ ('button.' ~ button.title)|trans }}
-                        </button>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        {% endif %}
     {% endif %}
 
 {% endblock %}

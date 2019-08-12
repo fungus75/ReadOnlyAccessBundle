@@ -8,7 +8,6 @@
     'alias': 'alwaysVisible',
     'username': 'hidden-xs',
     'email': 'hidden-xs hidden-sm',
-    'readonlycustomer.isEnabled': 'hidden-xs',
     'customer': ''
 } %}
 
@@ -46,15 +45,6 @@
                 <td>{{ widgets.username(entry) }}</td>
                 <td class="{{ tables.data_table_column_class(tableName, columns, 'username') }}">{{ entry.username }}</td>
                 <td class="{{ tables.data_table_column_class(tableName, columns, 'email') }}">{{ entry.email }}</td>
-                <td style="cursor: pointer" class="open-edit alternative-link {{ tables.data_table_column_class(tableName, columns, 'isReadonlyEnabled') }}" data-href="{{ path('readonly_access_admin_togglepermission', {'user': entry.id,'page':page}) }}">
-                    {% set hasReadonlyRole = false %}
-                    {% for role in entry.roles %}
-                        {% if role == 'ROLE_READONLYACCESS_USER' %}
-                            {% set hasReadonlyRole = true %}
-                        {% endif %}
-                    {% endfor %}
-                    {{ widgets.label_visible(hasReadonlyRole) }}
-                </td>
                 <td class="{{ tables.data_table_column_class(tableName, columns, 'customer') }}">
                     {% set readOnlyCustomer = '' %}
                     {% for preference in entry.preferences %}
@@ -62,10 +52,8 @@
                             {% set readOnlyCustomer = preference.value %}
                         {% endif %}
                     {% endfor %}
-                    <select size="1" id="readOnlyCustomerDD_{{ entry.id }}" onchange="readOnlyCustomerChanged({{ entry.id }})" {% if not hasReadonlyRole %} disabled="disabled" {% endif %} >
-			{% if readOnlyCustomer == '' %}
-			    <option> ---- </option>
-			{% endif %}
+                    <select size="1" id="readOnlyCustomerDD_{{ entry.id }}" onchange="readOnlyCustomerChanged({{ entry.id }})" >
+                        <option value=''> -- {{ 'readonlycustomer.admin.userIsDisabled'|trans }} -- </option>
                         {% for cust in customers %}
                             <option value="{{ cust.id }}" {% if cust.id == readOnlyCustomer %} selected {% endif %} >{{ cust.name }}</option>
                         {% endfor %}

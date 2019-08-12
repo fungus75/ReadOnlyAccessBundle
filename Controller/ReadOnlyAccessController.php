@@ -44,7 +44,7 @@ class ReadOnlyAccessController extends AbstractController
 
 	$customerQuery = new CustomerQuery();
         $customerQuery->setOrderBy('name');
-	$customers = $this->getDoctrine()->getRepository(Customer::class)->findByQuery($customerQuery);
+	$customers = $this->getDoctrine()->getRepository(Customer::class)->getCustomersForQuery($customerQuery);
 
 
 	return $this->render('@ReadOnlyAccess/index.html.twig', [
@@ -53,26 +53,6 @@ class ReadOnlyAccessController extends AbstractController
 	    'page' => $page,
 	    'customers' => $customers
         ]);
-    }
-
-   /**
-     * @Route(path="/togglePermission/{page}/{user}", requirements={"page": "[1-9]\d*", "user": "[1-9]\d*"}, name="readonly_access_admin_togglepermission", methods={"GET"})
-     * @Security("is_granted('ROLE_SUPER_ADMIN') or is_granted('edit_readonly_user')")
-     * @param int $page
-     * @param int $user
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function togglePermissionAction($page, $user, Request $request)
-    {
-        $userEntry=$this->getDoctrine()->getRepository(User::class)->find($user);
-        if ($userEntry!=null) {
-            if ($userEntry->hasRole("ROLE_READONLYACCESS_USER")) $userEntry->removeRole("ROLE_READONLYACCESS_USER");
-            else $userEntry->addRole("ROLE_READONLYACCESS_USER");
-	    $this->getDoctrine()->getManager()->flush();
-        }
-
-        return $this->indexAction($page,$request);
     }
 
 

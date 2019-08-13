@@ -37,6 +37,10 @@ class ReadOnlyAccessUserController extends AbstractController
 	}
 
 	$customer=$this->getDoctrine()->getRepository(Customer::class)->find($customerId);
+	if ($customer === null) {
+		// looks like customer was deleted or something else, shouldn't happened at all, but for sure
+		throw $this->createNotFoundException();
+	}
 
 	$begin=new \DateTime("first day of this month 00:00:00");
 

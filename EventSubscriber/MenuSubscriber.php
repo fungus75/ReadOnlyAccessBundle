@@ -61,7 +61,7 @@ class MenuSubscriber implements EventSubscriberInterface
 
         if ($auth->isGranted('ROLE_SUPER_ADMIN') || $auth->isGranted('edit_readonly_user')) {
             $menu->addChild(
-                new MenuItemModel('readonly_access', 'Readony User', 'readonly_access_admin', [], 'fab fa-css3')
+                new MenuItemModel('readonly_access', 'Readony User', 'readonly_access_admin', [], 'fas fa-book')
             );
         }
 
@@ -71,7 +71,7 @@ class MenuSubscriber implements EventSubscriberInterface
 		$customerId=$user->getPreferenceValue("readOnlyAccessCustomer");
 		if ($customerId!="") {
 	            $event->getMenu()->addItem(
-        	        new MenuItemModel('readonly_access_showcustomer', 'Show Recorded Times', 'readonly_access_showcustomer', [], 'fab fa-css3')
+        	        new MenuItemModel('readonly_access_showcustomer', 'Show Recorded Times', 'readonly_access_showcustomer', [], 'fas fa-book')
             	    );
 	        } 
          }

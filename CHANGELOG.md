@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5
+- minor adjustemds, thanks to Kevin Papst
+  - Icon-Change
+  - Bugfix if customer was deleted in the past
+
+
 ## 0.4
 - updated to Kamai 2 V1.1
 

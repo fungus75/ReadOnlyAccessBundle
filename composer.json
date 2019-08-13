@@ -21,7 +21,7 @@
     "extra": {
         "kimai": {
             "require": "1.1",
-            "version": "0.4",
+            "version": "0.5",
             "name": "ReadOnlyAccessBundle"
         }
     }

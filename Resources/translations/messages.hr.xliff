@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file date="2019-02-20T20:00:00Z" source-language="en" target-language="hr" datatype="plaintext" original="none">
+        <body>
+            <trans-unit id="readonlycustomer.admin.title">
+                <source>readonlycustomer.admin.title</source>
+                <target>Pristup samo čitanju kupaca</target>
+            </trans-unit>
+            <trans-unit id="readonlycustomer.admin.subtitle">
+                <source>readonlycustomer.admin.subtitle</source>
+                <target>Administriraj korisnike s pristupom samo čitanja i odgovarajućih kupaca</target>
+            </trans-unit>
+            <trans-unit id="label.readonlycustomer.isEnabled">
+                <source>label.readonlycustomer.isEnabled</source>
+                <target>Aktivirano</target>
+            </trans-unit>
+            <trans-unit id="Readony User">
+                <source>Readony User</source>
+                <target>Pristup samo čitanju</target>
+            </trans-unit>
+
+            <trans-unit id="readonlycustomer.export.title">
+                <source>readonlycustomer.export.title</source>
+                <target>Pokaži zabilježena vremena</target>
+            </trans-unit>
+            <trans-unit id="readonlycustomer.export.subtitle">
+                <source>readonlycustomer.export.subtitle</source>
+                <target>Pokaži zabilježena vremena za tvoje poduzeće</target>
+            </trans-unit>
+            <trans-unit id="readonlycustomer.export.for_customer">
+                <source>readonlycustomer.export.for_customer</source>
+                <target>za kupca</target>
+            </trans-unit>
+            <trans-unit id="Show Recorded Times">
+                <source>Show Recorded Times</source>
+                <target>Pokaži zabilježena vremena</target>
+            </trans-unit>
+
+            <trans-unit id="readonlycustomer.export.summary.description">
+		<source>readonlycustomer.export.summary.description</source>
+		<target>Ukupno vrijeme i iznos</target>
+	    </trans-unit>
+
+            <trans-unit id="readonlycustomer.admin.userIsDisabled">
+                <source>readonlycustomer.admin.userIsDisabled</source>
+                <target>deaktivirano</target>
+            </trans-unit>
+
+
+        </body>
+    </file>
+</xliff>
+
